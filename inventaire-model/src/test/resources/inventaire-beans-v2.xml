@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Déclaration des beans avec l'injection par constructeur-->
+	<bean id="date" class="java.util.Date"/>
+	
+	<bean id="media1" class="fr.formation.bibliotheque.inventaire.modele.Media">	
+		<constructor-arg name="identifiant" value="0"/>
+		<constructor-arg name="titre" value="Hibernate"/>
+		<constructor-arg name="auteur" value="Orsys"/>
+		<constructor-arg name="datePublication" ref="date"/>
+	</bean>
+	
+	<bean id="media2" class="fr.formation.bibliotheque.inventaire.modele.Media">	
+		<constructor-arg name="identifiant" value="0"/>
+		<constructor-arg name="titre" value="Maven"/>
+		<constructor-arg name="auteur" value="Orsys"/>
+		<constructor-arg name="datePublication" ref="date"/>
+	</bean>
+	
+	<bean id="exemplaire1" class="fr.formation.bibliotheque.inventaire.modele.Exemplaire">
+		<constructor-arg name="reference" value="ref1"/>	
+		<constructor-arg name="etat">
+			<value type="fr.formation.bibliotheque.inventaire.modele.EtatExemplaire">Reserve</value>
+		</constructor-arg>
+		
+		<property name="media" ref="media1"/>
+	</bean>
+	
+	<!-- déclaration d'un entity manager -->
+	
+	<!-- Une seule instance de la factory : scope="singleton" -->
+	<bean id="factory" class="javax.persistence.Persistence"  
+			factory-method="createEntityManagerFactory"  destroy-method="close" scope="singleton">
+			<constructor-arg value="bibliotheque_pu" />
+	</bean>
+	<!-- Spring cree une nouvelle instance de l'entityManager : scope="prototype" -->
+	<bean id="entityManager" factory-bean="factory" factory-method="createEntityManager" destroy-method="close"
+		scope="prototype"
+	/>
+	
+	<bean id="mediaDao"  class="fr.formation.bibliotheque.inventaire.dao.jpa.MediaDaoImpl">
+		<constructor-arg ref="entityManager"/>
+	</bean>
+	
+</beans>

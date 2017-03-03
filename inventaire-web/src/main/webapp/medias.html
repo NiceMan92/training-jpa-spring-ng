@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Gestion des médias avec AngularJS</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+<script type="text/javascript" src="js/inventaire.js">
+</script>
+</head>
+<body data-ng-app="inventaireApp" data-ng-controller="mediaCtrl">
+<h2>Gestion des médias avec AngularJS</h2>
+
+<h5>Recherche/Ajout</h5>
+<form>
+	<label>Titre</label> 
+		<input type="text" name="titre" data-ng-model="media.titre"
+			placeholder="Veuillez saisir le titre"
+		 />
+	<br/>
+	<label>Auteur</label> 
+		<input type="text" name="auteur" data-ng-model="media.auteur"/>
+	<br/>
+	<input type="button" value="Chercher"/>
+	<input type="button" value="Ajouter" data-ng-click="ajouter();"/>
+</form>
+<h5>Liste des médias</h5>
+<table border="1" width="80%">
+	<tr>
+		<th>Identifiant</th>
+		<th>Titre</th>
+		<th>Auteur</th>
+		<th>Actions</th>
+	</tr>
+	<tr data-ng-repeat="media in medias | orderBy:'titre' | filter:{'titre':media.titre,'auteur':media.auteur}">
+		<td>{{media.identifiant}}</td>
+		<td>{{media.titre}}</td>
+		<td>{{media.auteur}}</td>
+		<td>
+			<input type="button" value="Supprimer" data-ng-click="supprimer(media.identifiant);">
+		</td>
+	</tr>
+</table>
+</body>
+</html>

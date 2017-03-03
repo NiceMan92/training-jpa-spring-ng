@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Déclaration d'un bean avec l'injection par setter -->
+	<bean id="date" class="java.util.Date"/>
+	
+	<bean id="media1" class="fr.formation.bibliotheque.inventaire.modele.Media">	
+		<property name="identifiant" value="0"/>
+		<property name="titre" value="Hibernate"/>
+		<property name="auteur" value="Orsys"/>
+		<property name="datePublication" ref="date"/>
+	</bean>
+	
+	<bean id="media2" class="fr.formation.bibliotheque.inventaire.modele.Media">	
+		<property name="identifiant" value="0"/>
+		<property name="titre" value="Maven"/>
+		<property name="auteur" value="Orsys"/>
+		<property name="datePublication" ref="date"/>
+	</bean>
+	
+	<bean id="exemplaire1" class="fr.formation.bibliotheque.inventaire.modele.Exemplaire">
+		<property name="reference" value="ref1"/>
+		<property name="media" ref="media1"/>
+		<property name="etat">
+			<value type="fr.formation.bibliotheque.inventaire.modele.EtatExemplaire">Reserve</value>
+		</property>
+	</bean>
+	
+</beans>
