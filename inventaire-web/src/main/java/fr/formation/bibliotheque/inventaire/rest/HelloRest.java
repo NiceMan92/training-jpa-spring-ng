@@ -27,7 +27,7 @@ public class HelloRest {
 	@GET
 	@Produces(MediaType.TEXT_HTML)	
 	public String sayHelloHTML(){
-		return "<h1>Bonjour tout le monde</h1>";
+		return "<h1>Bonjour tout le monde comment ça va bien ? </h1>";
 	}
 	
 	@GET
