@@ -15,4 +15,6 @@ public class LowerInputStreamDecorator extends FilterInputStream{
 		int c = super.read();
 		return c == -1 ? c : Character.toLowerCase(c);
 	}
+	
+	
 }
