@@ -12,7 +12,7 @@ public class LowerInputStreamDecorator extends FilterInputStream{
 	
 	@Override
 	public int read() throws IOException {
-		int c = super.read();
+		int c = super.read(); 
 		return c == -1 ? c : Character.toLowerCase(c);
 	} 
 	
